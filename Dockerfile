@@ -25,6 +25,7 @@ RUN R -e "install_github("metagraf/rHighcharts")"
 
 COPY shiny-server.conf  /etc/shiny-server/shiny-server.conf
 COPY /myapp /srv/shiny-server/
+COPY /RData /srv/shiny-server/
 
 EXPOSE 80
 
