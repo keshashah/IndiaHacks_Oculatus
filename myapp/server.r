@@ -1,3 +1,4 @@
+install_github("metagraf/rHighcharts")
 shinyServer(function(input,output,session){
 
   output$leadershipScore<-renderChart({

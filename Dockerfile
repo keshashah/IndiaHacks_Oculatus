@@ -21,8 +21,6 @@ RUN wget --no-verbose https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubu
 
 RUN R -e "install.packages(c('googleVis','tm.plugin.sentiment','shiny', 'rmarkdown', 'tm', 'wordcloud', 'memoise','RColorBrewer','rJava','tm.plugin.webmining','devtools','rhighcharts','corrplot'), repos='http://cran.rstudio.com/')"
 
-RUN R -e "install_github("metagraf/rHighcharts")"
-
 COPY shiny-server.conf  /etc/shiny-server/shiny-server.conf
 COPY /myapp /srv/shiny-server/
 COPY /RData /srv/shiny-server/
