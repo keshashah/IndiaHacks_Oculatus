@@ -1,4 +1,12 @@
+library(devtools) 
+ library(shiny)
+ library(tm.plugin.sentiment)
+ library(tm.plugin.webmining) 
+library(devtools)
 install_github("metagraf/rHighcharts")
+library(rHighcharts)
+library(googleVis)
+
 shinyServer(function(input,output,session){
 
   output$leadershipScore<-renderChart({
