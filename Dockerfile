@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
     libcurl4-gnutls-dev \
     libcairo2-dev/unstable \
     libxt-dev \
-    libssl-dev
+    libssl-dev \
+    npm
 
 # Download and install shiny server
 RUN wget --no-verbose https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/VERSION -O "version.txt" && \
@@ -28,5 +29,9 @@ COPY /RData /srv/shiny-server/
 EXPOSE 80
 
 COPY shiny-server.sh /usr/bin/shiny-server.sh
+
+WORKDIR /srv/shiny-server
+
+RUN npm install 
 
 CMD ["/usr/bin/shiny-server.sh"]
