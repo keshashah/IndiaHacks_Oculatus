@@ -9,6 +9,8 @@ library(googleVis)
 
 shinyServer(function(input,output,session){
 
+  options(shiny.sanitize.errors = FALSE)
+
   output$leadershipScore<-renderChart({
     if(input$symb=="ola"||input$symb=="OLA")
     {
