@@ -25,7 +25,6 @@ RUN wget --no-verbose https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubu
     gdebi -n ss-latest.deb && \
     rm -f version.txt ss-latest.deb
 
-RUN R -e "install.packages(c('googleVis','tm.plugin.sentiment','shiny', 'rmarkdown', 'tm', 'wordcloud', 'memoise','RColorBrewer','rJava','tm.plugin.webmining','devtools','rHighcharts','corrplot'), repos='http://cran.rstudio.com/')"
 
 COPY /myapp/www /srv/shiny-server/www
 COPY /RData /srv/shiny-server/
@@ -34,7 +33,8 @@ WORKDIR /srv/shiny-server/www
 
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN npm install
-RUN R -e 'library(devtools);install_github("rHighcharts", "metagraf")'
+RUN sudo su - -c 'R -e "install.packages(c(\"googleVis\",\"tm.plugin.sentiment\",\"shiny\", \"rmarkdown\", \"tm\", \"wordcloud\", \"memoise\",\"RColorBrewer\",\"rJava\",\"tm.plugin.webmining\",\"devtools\",\"rHighcharts\",\"corrplot\"), repos=\"http://cran.rstudio.com/\")"'
+RUN sudo su - -c 'R -e "library(devtools);install_github(\"rHighcharts\", \"metagraf\")"'
 
 COPY shiny-server.conf  /etc/shiny-server/shiny-server.conf
 EXPOSE 80

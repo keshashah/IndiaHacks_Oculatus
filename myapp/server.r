@@ -1,10 +1,10 @@
 library(devtools) 
  library(shiny)
 install_github("mannau/tm.plugin.sentiment")
+install_github("mannau/tm.plugin.webmining")
  library(tm.plugin.sentiment)
  library(tm.plugin.webmining) 
 library(devtools)
-install_github("metagraf/rHighcharts")
 library(rHighcharts)
 library(googleVis)
 
