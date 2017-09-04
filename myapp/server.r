@@ -1,5 +1,6 @@
 library(devtools) 
  library(shiny)
+install_github("mannau/tm.plugin.sentiment")
  library(tm.plugin.sentiment)
  library(tm.plugin.webmining) 
 library(devtools)
