@@ -166,6 +166,9 @@ HTML('</div>
      <div class="row">
      <div class="col-lg-12 text-center">
      <h2 class="section-heading">FINANCIALS</h2>
+     <h3 class="section-subheading text-muted"></h3>'), chartOutput('financial1'), HTML('
+     </div>
+     </div>
      <h3 class="section-subheading text-muted"></h3>'), chartOutput('financial'), HTML('
      </div>
      </div>

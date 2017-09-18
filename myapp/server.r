@@ -171,7 +171,7 @@ shinyServer(function(input,output,session){
     }
   })
   
-  output$financial<-renderChart({
+  output$financial1<-renderChart({
     
     if(input$symb=="ola"||input$symb=="OLA")
     {
@@ -189,7 +189,26 @@ shinyServer(function(input,output,session){
     fin$data(x = xaxis, y =  yaxis, type = "line", name = "Amount invested(in million USD)",color="#100146")
     return(fin)
   })
-
+  
+  output$financial<-renderChart({
+    
+    if(input$symb=="ola"||input$symb=="OLA")
+    {
+      xaxis= ola_cbr
+      yaxis=ola_cbry
+    }
+    else
+    {
+      xaxis= uber_cbry
+      yaxis=uber_cbr
+    }
+    fin <- rHighcharts:::Chart$new()
+    fin$title(text = input$symb)
+    fin$subtitle(text = "Cash Burn Rate")
+    fin$data(x = xaxis,  y =  yaxis, type = "line", name = "Amount spent per month(in million USD)",color="#100146")
+    return(fin)
+  })
+  
   output$downloads<-renderText({
     if(input$symb=="ola"||input$symb=="OLA")
     {
