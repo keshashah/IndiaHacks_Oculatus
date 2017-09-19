@@ -1,4 +1,3 @@
-library(rHighcharts)
 shinyUI(
   fluidPage(
     HTML(
@@ -78,7 +77,72 @@ shinyUI(
         </div>
     </header>
     
-      
+<section id="Recommendation list" style="color:white;background-color:#222;" >
+<div class="container">
+    <div class="row">
+	<div class="col-lg-14 text-center">
+	    <h2 class="section-heading">Recommendation list</h2>
+	</div>
+    </div>
+   <br>
+     <table>
+	     <tr>
+	    <th>Sector</th>
+	    <th>Company</th> 
+	    <th>Company</th>
+	  </tr>
+	  <tr>
+	    <td>Cabs</td>
+	    <td>Ola</td> 
+	    <td>Uber</td>
+	  </tr>
+	  <tr>
+	    <td>E-Wallet</td>
+	    <td>Paytm</td> 
+	    <td>Mobikwik</td>
+	  </tr>
+	  <tr>
+	    <td>E-commerce</td>
+	    <td>Flipkart</td> 
+	    <td>Snapdeal</td>
+	  </tr>
+	  <tr>
+	    <td>Healthcare /Pharma</td>
+	    <td>drChrono</td> 
+	    <td>Ftocracy</td>
+	  </tr>
+	  <tr>
+	    <td>Education</td>
+	    <td>FrontRow</td> 
+	    <td>Udemy</td>
+	  </tr>
+	  <tr>
+	    <td>Rentals</td>
+	    <td>Zoomcar</td> 
+	    <td>Rent-o-mojo</td>
+	  </tr>
+	  <tr>
+	    <td>Fintech</td>
+	    <td>CreditKarma</td> 
+	    <td>Chain</td>
+	  </tr>
+	  <tr>
+	    <td>Fashion</td>
+	    <td>Tradesy</td> 
+	    <td>Popxo</td>
+	  </tr>
+	  <tr>
+	    <td>Travel</td>
+	    <td>Tripoto</td> 
+	    <td>TouristEye</td>
+	  </tr>
+	  <tr>
+	    <td>Cloud Computing</td>
+	    <td>Cloudability</td> 
+	    <td>Astronomer</td>
+	  </tr>
+	</table>
+   </section>
 
     <section id="leadership" style="color:white;background-color:#222;" >
         <div class="container">
@@ -154,11 +218,16 @@ HTML('</div>
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">PRODUCT</h2>
                     <h3 class="section-subheading text-muted"></h3>
-<div class="row"><div class="col-md-6"><font size="20"><b>'),  htmlOutput("downloads"),   HTML('</b></font><br>
+<div class="row"><div class="col-md-6"><font size="20"><b>'),  htmlOutput("downloads"),HTML('</b></font><br>
 <font size="4"><b>DOWNLOADS</b></font></div>
 <div class="col-md-6"><font size="20"><b>'),  htmlOutput("ratings"),   HTML('</b></font><br>
-<font size="4"><b>RATING ON THE APP STORE</b></font></div></div>
+<font size="4"><b>RATING ON THE APP STORE</b></font></div>
+</div>
+<h2 class="section-subheading text-muted" style="padding:50px"><font size="20"><b>'),  htmlOutput("Growth"),chartOutput('growth'),   HTML('</b></font><br>
+</h2>
+
                 </div>
+				
             </div>
     </div>
     </section>
@@ -167,9 +236,6 @@ HTML('</div>
      <div class="row">
      <div class="col-lg-12 text-center">
      <h2 class="section-heading">FINANCIALS</h2>
-     <h3 class="section-subheading text-muted"></h3>'), chartOutput('financial1'), HTML('
-     </div>
-     </div>
      <h3 class="section-subheading text-muted"></h3>'), chartOutput('financial'), HTML('
      </div>
      </div>

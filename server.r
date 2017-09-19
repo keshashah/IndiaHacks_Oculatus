@@ -3,12 +3,11 @@ library(devtools)
  library(tm.plugin.sentiment)
  library(tm.plugin.webmining) 
 library(devtools)
+install_github("metagraf/rHighcharts")
 library(rHighcharts)
 library(googleVis)
 
 shinyServer(function(input,output,session){
-
-  options(shiny.sanitize.errors = FALSE)
 
   output$leadershipScore<-renderChart({
     if(input$symb=="ola"||input$symb=="OLA")
@@ -58,7 +57,8 @@ shinyServer(function(input,output,session){
     b <- rHighcharts:::Chart$new()
     b$title(text = "Leadership Score")
     b$subtitle(text = input$symb)
-    b$data(x = leadershipkey, y =  leaders, type = "column", name = "Leadership Score",color="#100146")
+    b$data(x = roles[leadershipkey], y =  leaders, type = "column",labels.default(roles,roles) ,name = "Leadership Score",color="#100146")
+    b$yAxis(plotOutput(roles))
     return(b)
     
   })
@@ -80,6 +80,7 @@ shinyServer(function(input,output,session){
     b$title(text = "Market Share with Competitors")
     b$subtitle(text = input$symb)
     b$data(x = cvek, y =  value, type = "pie", name = "Market Share with Competitors")
+    
     return(b)
     
   })
@@ -172,7 +173,7 @@ shinyServer(function(input,output,session){
     }
   })
   
-  output$financial1<-renderChart({
+  output$financial<-renderChart({
     
     if(input$symb=="ola"||input$symb=="OLA")
     {
@@ -191,26 +192,44 @@ shinyServer(function(input,output,session){
     return(fin)
   })
   
-  output$financial<-renderChart({
+  output$growth<-renderChart({
+  
     
     if(input$symb=="ola"||input$symb=="OLA")
     {
-      xaxis= ola_cbr
-      yaxis=ola_cbry
+      xaxis= olaTimeGrowth
+      yaxis=olaUsers
     }
     else
     {
-      xaxis= uber_cbry
-      yaxis=uber_cbr
+      xaxis= uberTimGrowth
+      yaxis=uberUsers
     }
-    fin <- rHighcharts:::Chart$new()
-    fin$title(text = input$symb)
-    fin$subtitle(text = "Cash Burn Rate")
-    fin$data(x = xaxis,  y =  yaxis, type = "line", name = "Amount spent per month(in million USD)",color="#100146")
-    return(fin)
+    grow <- rHighcharts:::Chart$new()
+    grow$title(text = input$symb)
+    grow$subtitle(text = "Growth rate")
+    grow$data(x = xaxis, y =  yaxis, type = "spline", name = "time",color="#100146")
+    grow$yAxis(title= list(text="Active Users (in million)"))
+    grow$xAxis(categories = xaxis)
+    grow$yAxis(categories =yaxis)
+    return(grow)
   })
   
+  
+
   output$downloads<-renderText({
+    if(input$symb=="ola"||input$symb=="OLA")
+    {
+      "10 million"
+    }
+    else
+    {
+      "100 million"
+    }
+    
+  })
+  
+  output$uploads<-renderText({
     if(input$symb=="ola"||input$symb=="OLA")
     {
       "10 million"
