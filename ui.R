@@ -77,7 +77,72 @@ shinyUI(
         </div>
     </header>
     
-      
+<section id="Recommendation list" style="color:white;background-color:#222;" >
+<div class="container">
+    <div class="row">
+	<div class="col-lg-14 text-center">
+	    <h2 class="section-heading">Recommendation list</h2>
+	</div>
+    </div>
+   <br>
+     <table>
+	     <tr>
+	    <th>Sector</th>
+	    <th>Company</th> 
+	    <th>Company</th>
+	  </tr>
+	  <tr>
+	    <td>Cabs</td>
+	    <td>Ola</td> 
+	    <td>Uber</td>
+	  </tr>
+	  <tr>
+	    <td>E-Wallet</td>
+	    <td>Paytm</td> 
+	    <td>Mobikwik</td>
+	  </tr>
+	  <tr>
+	    <td>E-commerce</td>
+	    <td>Flipkart</td> 
+	    <td>Snapdeal</td>
+	  </tr>
+	  <tr>
+	    <td>Healthcare /Pharma</td>
+	    <td>drChrono</td> 
+	    <td>Ftocracy</td>
+	  </tr>
+	  <tr>
+	    <td>Education</td>
+	    <td>FrontRow</td> 
+	    <td>Udemy</td>
+	  </tr>
+	  <tr>
+	    <td>Rentals</td>
+	    <td>Zoomcar</td> 
+	    <td>Rent-o-mojo</td>
+	  </tr>
+	  <tr>
+	    <td>Fintech</td>
+	    <td>CreditKarma</td> 
+	    <td>Chain</td>
+	  </tr>
+	  <tr>
+	    <td>Fashion</td>
+	    <td>Tradesy</td> 
+	    <td>Popxo</td>
+	  </tr>
+	  <tr>
+	    <td>Travel</td>
+	    <td>Tripoto</td> 
+	    <td>TouristEye</td>
+	  </tr>
+	  <tr>
+	    <td>Cloud Computing</td>
+	    <td>Cloudability</td> 
+	    <td>Astronomer</td>
+	  </tr>
+	</table>
+   </section>
 
     <section id="leadership" style="color:white;background-color:#222;" >
         <div class="container">
