@@ -3,11 +3,12 @@ library(devtools)
  library(tm.plugin.sentiment)
  library(tm.plugin.webmining) 
 library(devtools)
-install_github("metagraf/rHighcharts")
 library(rHighcharts)
 library(googleVis)
 
 shinyServer(function(input,output,session){
+
+  options(shiny.sanitize.errors = FALSE)
 
   output$leadershipScore<-renderChart({
     if(input$symb=="ola"||input$symb=="OLA")

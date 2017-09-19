@@ -1,3 +1,4 @@
+library(rHighcharts)
 shinyUI(
   fluidPage(
     HTML(
