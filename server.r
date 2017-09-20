@@ -1,14 +1,15 @@
 library(devtools) 
- library(shiny)
- library(tm.plugin.sentiment)
- library(tm.plugin.webmining) 
+library(shiny)
+library(tm.plugin.sentiment)
+library(tm.plugin.webmining) 
 library(devtools)
-install_github("metagraf/rHighcharts")
 library(rHighcharts)
 library(googleVis)
 
 shinyServer(function(input,output,session){
-
+  
+  options(shiny.sanitize.errors = FALSE)
+  
   output$leadershipScore<-renderChart({
     if(input$symb=="ola"||input$symb=="OLA")
     {
@@ -80,7 +81,6 @@ shinyServer(function(input,output,session){
     b$title(text = "Market Share with Competitors")
     b$subtitle(text = input$symb)
     b$data(x = cvek, y =  value, type = "pie", name = "Market Share with Competitors")
-    
     return(b)
     
   })
@@ -173,7 +173,22 @@ shinyServer(function(input,output,session){
     }
   })
   
-  output$financial<-renderChart({
+  output$newswordcloud <- renderPlot({
+    if(input$symb=="ola"||input$symb=="OLA")
+    {
+      wordcloud(words = d$word, freq = d$freq, min.freq = 1,
+                max.words=200, random.order=FALSE, rot.per=0.35, 
+                colors=brewer.pal(8, "Dark2"))
+    }
+    else
+    {
+      wordcloud(words = d1$word, freq = d1$freq, min.freq = 1,
+                max.words=200, random.order=FALSE, rot.per=0.35, 
+                colors=brewer.pal(8, "Dark2"))
+    }
+  })
+  
+  output$financial1<-renderChart({
     
     if(input$symb=="ola"||input$symb=="OLA")
     {
@@ -189,11 +204,32 @@ shinyServer(function(input,output,session){
     fin$title(text = input$symb)
     fin$subtitle(text = "Previous rounds of investment")
     fin$data(x = xaxis, y =  yaxis, type = "line", name = "Amount invested(in million USD)",color="#100146")
+    fin$xAxis(categories = xaxis)
+    return(fin)
+  })
+  
+  output$financial<-renderChart({
+    
+    if(input$symb=="ola"||input$symb=="OLA")
+    {
+      xaxis= ola_cbr
+      yaxis=ola_cbry
+    }
+    else
+    {
+      xaxis= uber_cbry
+      yaxis=uber_cbr
+    }
+    fin <- rHighcharts:::Chart$new()
+    fin$title(text = input$symb)
+    fin$subtitle(text = "Cash Burn Rate")
+    fin$data(x = xaxis,  y =  yaxis, type = "line", name = "Amount spent per month(in million USD)",color="#100146")
+    fin$xAxis(categories = yaxis)
     return(fin)
   })
   
   output$growth<-renderChart({
-  
+    
     
     if(input$symb=="ola"||input$symb=="OLA")
     {
@@ -215,21 +251,7 @@ shinyServer(function(input,output,session){
     return(grow)
   })
   
-  
-
   output$downloads<-renderText({
-    if(input$symb=="ola"||input$symb=="OLA")
-    {
-      "10 million"
-    }
-    else
-    {
-      "100 million"
-    }
-    
-  })
-  
-  output$uploads<-renderText({
     if(input$symb=="ola"||input$symb=="OLA")
     {
       "10 million"

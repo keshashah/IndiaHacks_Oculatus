@@ -237,6 +237,10 @@ header {
   text-align: center;
   color: white;
 }
+.wordcloudhead{
+  text-align: center;
+  font-style:italic;
+}
 header .intro-text {
   padding-top: 100px;
   padding-bottom: 50px;

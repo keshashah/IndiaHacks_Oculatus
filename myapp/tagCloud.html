@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Tag Cloud</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+	<script type="text/javascript" src="http://yihui.name/en/wp-content/uploads/2009/06/swfobject.js"></script>
+	<div id="tagCloudId">This will be shown to users with no Flash or Javascript.</div>
+	<script type="text/javascript">
+		var so = new SWFObject("http://yihui.name/en/wp-content/uploads/2009/06/tagcloud.swf", "tagcloud", "600", "400", "9", "#ffffff");
+		so.addVariable("mode", "tags");
+		so.addVariable("tcolor", "0x333333");
+		so.addVariable("tcolor2", "0x009900");
+		so.addVariable("hicolor", "0xff0000");
+		so.addVariable("tspeed", "100");
+		so.addVariable("distr", "true");
+		so.addVariable("tagcloud", "<tags><a href='http://www.ola.com' style='3'>ola</a><a href='http://www.uber.com' style='5'>uber</a><a href='http://www.lyft.com' style='4'>lyft</a><a href='http://www.blabla.com' style='2'>blabla</a></tags>");
+		so.write("tagCloudId");
+		</script>
+
+</body>
+
+</html>

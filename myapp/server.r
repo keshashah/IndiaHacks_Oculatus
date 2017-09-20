@@ -58,7 +58,17 @@ shinyServer(function(input,output,session){
     b <- rHighcharts:::Chart$new()
     b$title(text = "Leadership Score")
     b$subtitle(text = input$symb)
-    b$data(x = leadershipkey, y =  leaders, type = "column", name = "Leadership Score",color="#100146")
+    if(input$symb == "OLA" || input$symb == "o
+       la"){
+      b$data(x = olaPositionHolders[leadershipkey], y =  leaders, type = "column" ,name = "Leadership Score",color="#100146")  
+      b$yAxis(plotOutput(olaPositionHolders))
+       } 
+    else{
+    b$data(x = uberPositionHolders[leadershipkey], y =  leaders, type = "column" ,name = "Leadership Score",color="#100146")
+      b$yAxis(plotOutput(uberPositionHolders))
+      }
+      
+    b$xAxis(categories=roles, x=olaPositionHolders[leadershipkey])
     return(b)
     
   })
@@ -172,7 +182,22 @@ shinyServer(function(input,output,session){
     }
   })
   
-  output$financial<-renderChart({
+  output$newswordcloud <- renderPlot({
+    if(input$symb=="ola"||input$symb=="OLA")
+    {
+      wordcloud(words = d$word, freq = d$freq, min.freq = 3,
+              max.words=200, random.order=FALSE, rot.per=0.35, 
+              colors=brewer.pal(8, "Dark2"))
+    }
+    else
+    {
+      wordcloud(words = d1$word, freq = d1$freq, min.freq = 1,
+                max.words=200, random.order=FALSE, rot.per=0.35, 
+                colors=brewer.pal(8, "Dark2"))
+    }
+  })
+  
+  output$financial1<-renderChart({
     
     if(input$symb=="ola"||input$symb=="OLA")
     {
@@ -188,9 +213,53 @@ shinyServer(function(input,output,session){
     fin$title(text = input$symb)
     fin$subtitle(text = "Previous rounds of investment")
     fin$data(x = xaxis, y =  yaxis, type = "line", name = "Amount invested(in million USD)",color="#100146")
+    fin$xAxis(categories = xaxis)
     return(fin)
   })
-
+  
+  output$financial<-renderChart({
+    
+    if(input$symb=="ola"||input$symb=="OLA")
+    {
+      xaxis= ola_cbr
+      yaxis=ola_cbry
+    }
+    else
+    {
+      xaxis= uber_cbry
+      yaxis=uber_cbr
+    }
+    fin <- rHighcharts:::Chart$new()
+    fin$title(text = input$symb)
+    fin$subtitle(text = "Cash Burn Rate")
+    fin$data(x = xaxis,  y =  yaxis, type = "line", name = "Amount spent per month(in million USD)",color="#100146")
+    fin$xAxis(categories = yaxis)
+    return(fin)
+  })
+  
+  output$growth<-renderChart({
+    
+    
+    if(input$symb=="ola"||input$symb=="OLA")
+    {
+      xaxis= olaTimeGrowth
+      yaxis=olaUsers
+    }
+    else
+    {
+      xaxis= uberTimGrowth
+      yaxis=uberUsers
+    }
+    grow <- rHighcharts:::Chart$new()
+    grow$title(text = input$symb)
+    grow$subtitle(text = "Growth rate")
+    grow$data(x = xaxis, y =  yaxis, type = "spline", name = "time",color="#100146")
+    grow$yAxis(title= list(text="Active Users (in million)"))
+    grow$xAxis(categories = xaxis)
+    grow$yAxis(categories =yaxis)
+    return(grow)
+  })
+  
   output$downloads<-renderText({
     if(input$symb=="ola"||input$symb=="OLA")
     {

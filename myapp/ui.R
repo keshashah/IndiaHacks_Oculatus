@@ -140,12 +140,15 @@ HTML('</div>
 htmlOutput("totalSentiment"), HTML('</h4>'),
 htmlOutput("sentimentgauge"),HTML('</center>'),br(),
 chartOutput('senti'),
-textInput("news", "News Item", "1"),
-verbatimTextOutput("newsitem"),
+#textInput("news", "News Item", "1"),
+#verbatimTextOutput("newsitem"),
+
 HTML('
          </div>
-         </div>'),
+         </div><h4 class="wordcloudhead">Word cloud sourced from news articles and social media</h4>'),
+plotOutput("newswordcloud"),
 HTML('</div>
+  
     </section>
 
 <section id="product" style="color:white;background-color:#222;">
@@ -157,16 +160,23 @@ HTML('</div>
 <div class="row"><div class="col-md-6"><font size="20"><b>'),  htmlOutput("downloads"),   HTML('</b></font><br>
 <font size="4"><b>DOWNLOADS</b></font></div>
 <div class="col-md-6"><font size="20"><b>'),  htmlOutput("ratings"),   HTML('</b></font><br>
-<font size="4"><b>RATING ON THE APP STORE</b></font></div></div>
+<font size="4"><b>RATING ON THE APP STORE</b></font></div>
+</div>
+<h2 class="section-subheading text-muted" style="padding:50px"><font size="20"><b>'),  htmlOutput("Growth"),chartOutput('growth'),   HTML('</b></font><br>
+</h2>
+
                 </div>
+				
             </div>
     </div>
-    </section>
-<section id="financial">
+    </section><section id="financial">
         <div class="container">
      <div class="row">
      <div class="col-lg-12 text-center">
-     <h2 class="section-heading">FINANCIALS</h2>
+<h2 class="section-heading">FINANCIALS</h2>
+     <h3 class="section-subheading text-muted"></h3>'), chartOutput('financial1'), HTML('
+     </div>
+     </div>
      <h3 class="section-subheading text-muted"></h3>'), chartOutput('financial'), HTML('
      </div>
      </div>
