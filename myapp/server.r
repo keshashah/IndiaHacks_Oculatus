@@ -58,8 +58,17 @@ shinyServer(function(input,output,session){
     b <- rHighcharts:::Chart$new()
     b$title(text = "Leadership Score")
     b$subtitle(text = input$symb)
-    b$data(x = roles[leadershipkey], y =  leaders, type = "column",labels.default(roles,roles) ,name = "Leadership Score",color="#100146")
-    b$yAxis(plotOutput(roles))
+    if(input$symb == "OLA" || input$symb == "o
+       la"){
+      b$data(x = olaPositionHolders[leadershipkey], y =  leaders, type = "column" ,name = "Leadership Score",color="#100146")  
+      b$yAxis(plotOutput(olaPositionHolders))
+       } 
+    else{
+    b$data(x = uberPositionHolders[leadershipkey], y =  leaders, type = "column" ,name = "Leadership Score",color="#100146")
+      b$yAxis(plotOutput(uberPositionHolders))
+      }
+      
+    b$xAxis(categories=roles, x=olaPositionHolders[leadershipkey])
     return(b)
     
   })
@@ -176,7 +185,7 @@ shinyServer(function(input,output,session){
   output$newswordcloud <- renderPlot({
     if(input$symb=="ola"||input$symb=="OLA")
     {
-      wordcloud(words = d$word, freq = d$freq, min.freq = 1,
+      wordcloud(words = d$word, freq = d$freq, min.freq = 3,
               max.words=200, random.order=FALSE, rot.per=0.35, 
               colors=brewer.pal(8, "Dark2"))
     }
