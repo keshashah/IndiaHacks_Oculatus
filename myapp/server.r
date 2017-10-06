@@ -35,40 +35,21 @@ shinyServer(function(input,output,session){
     }
     else
     {
-      i<-1
-      for(person in uberfounders)
-      {
-        #scores the education
-        educationScore<-((person$education.level)/
-                           (person$education.brand ))*(person$education.relevance ) #relevance, brand - keep from 0.1 to 1
-        
-        workScore<-0
-        for(job in person$education.experience)
-        {
-          #scores the work experience
-          workScore<- workScore + (((job['years']/job['brand'])/job['role'])*job['relevance'])
-        }
-        
-        compositeScore<- educationScore + workScore;
-        leaders[[i]]<-compositeScore
-        i<-i+1
-      }
+      leaders <- c(4.667,2.667,0,0,3.33)
+     
     }
     
     b <- rHighcharts:::Chart$new()
     b$title(text = "Leadership Score")
     b$subtitle(text = input$symb)
-    if(input$symb == "OLA" || input$symb == "o
-       la"){
-      b$data(x = olaPositionHolders[leadershipkey], y =  leaders, type = "column" ,name = "Leadership Score",color="#100146")  
-      b$yAxis(plotOutput(olaPositionHolders))
-       } 
-    else{
-    b$data(x = uberPositionHolders[leadershipkey], y =  leaders, type = "column" ,name = "Leadership Score",color="#100146")
-      b$yAxis(plotOutput(uberPositionHolders))
-      }
+    if(input$symb== "ola" || input$symb == "OLA")
+    b$data(y = leaders, x =  olaPositionHolders, type = "column" ,name = "Leadership Score",color="#100146")
+    else
+      b$data(y = leaders, x =  uberPositionHolders, type = "column" ,name = "Leadership Score",color="#100146")
+    
       
-    b$xAxis(categories=roles, x=olaPositionHolders[leadershipkey])
+    b$yAxis(plotOutput(leadershipkey))
+    b$xAxis(categories=leadershipkey)
     return(b)
     
   })
@@ -247,7 +228,7 @@ shinyServer(function(input,output,session){
     }
     else
     {
-      xaxis= uberTimGrowth
+      xaxis= uberTimeGrowth
       yaxis=uberUsers
     }
     grow <- rHighcharts:::Chart$new()
